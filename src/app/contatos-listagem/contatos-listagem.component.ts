@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ContatoService } from '../contato.service';
 
 @Component({
   selector: 'app-contatos-listagem',
@@ -7,14 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContatosListagemComponent implements OnInit {
 
-  contatos = [
-    { id: 1, nome: 'Alexandre', email: 'alexandre@email.com'},
-    { id: 2, nome: 'Thiago', email: 'thiago@email.com'}
-  ]
+  // contatos = [
+  //   { "id": 1, "nome": "Alexandre", "email": 'alexandre@email.com'},
+  //   { "id": 2, "nome": "Thiago", "email": 'thiago@email.com'}
+  // ]
 
-  constructor() { }
+  contatos:Array<any>;
+
+  constructor(private contatoService: ContatoService) { }
 
   ngOnInit() {
+    this.listar();
+  }
+
+  listar(){
+    this.contatoService.listar().subscribe(dados => this.contatos = dados);
   }
 
 }
